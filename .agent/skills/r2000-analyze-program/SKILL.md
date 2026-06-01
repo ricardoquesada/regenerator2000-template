@@ -127,7 +127,8 @@ To build the candidate list:
 
 - **CRITICAL**: Always launch each subagent with an explicit target address (e.g., `$XXXX` or decimal `NNNNN`). **NEVER** use the "current cursor address" or rely on the active cursor location in the editor, as the cursor will change dynamically when running parallel subagents.
 - Same **rolling window** strategy as Phase 2: up to **7 concurrent subagents** (to avoid hitting rate limit quota errors like `RESOURCE_EXHAUSTED`).
-- **Complete Queue Coverage**: Unlike the routine phase, the symbol queue can be large. You **MUST** run the rolling window continuously until the *entire* remaining symbol queue is processed. Do not skip any unanalyzed custom symbols.
+- **Complete Queue Coverage**: Unlike the routine phase, the symbol queue can be large. You **MUST** run the rolling window continuously until the _entire_ remaining symbol queue is processed. Do not skip any unanalyzed custom symbols.
+- **NO PREMATURE HALTING**: The orchestrator **MUST NOT** truncate the candidate queue, skip custom symbols, or exit the rolling window phase early. Even if the custom symbol queue is very large (e.g., 50+ symbols), you must feed the queue continuously into the rolling window (replacing active slots immediately as subagents finish) until the entire list of unanalyzed custom symbols is fully processed. Halting early or classifying unanalyzed custom symbols as "skipped for review" is considered a workflow failure.
 - For each subagent, provide this prompt:
 
   > Read the skill file at `.agent/skills/r2000-analyze-symbol/SKILL.md` and follow its workflow.
