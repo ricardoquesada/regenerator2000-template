@@ -73,18 +73,19 @@ select which `.prg` program inside the disk you would like to load and disassemb
 
 ---
 
-## Supported File Formats
+## Starting the Analysis
 
-Regenerator 2000 natively supports:
+Once Regenerator 2000 is running with the MCP server enabled and your AI assistant is connected, type the following in the agent prompt to kick off a full automated analysis of the loaded program:
 
-- `.prg` - Commodore 8-bit program files (automatically parses SYS entry points).
-- `.crt` - Commodore 64 cartridge files (supports bank selection).
-- `.d64`, `.d71`, `.d81` - C64/C128 disk images (allows selecting `.prg` programs).
-- `.t64` - Tape images.
-- `.vsf` - VICE snapshot files (extracts 64KB RAM and sets PC as entry point).
-- `.dis65` - 6502bench SourceGen project files.
-- `.bin`, `.raw` - Pure raw binary files.
-- `.regen2000proj` - Regenerator 2000 project files.
+```
+analyze this program
+```
+
+The agent will orchestrate block classification, routine analysis, and symbol resolution across the entire disassembly.
+
+For more information on how to set up the agent and learn about the available MCP tools, see the [Regenerator 2000 MCP Documentation](https://regenerator2000.readthedocs.io/en/latest/mcp/).
+
+---
 
 ## Recommended Terminals
 
